@@ -6,7 +6,7 @@ import unittest
 import States
 
 
-class NumbersTest(TestCase):
+class LionTest(TestCase):
     def test_init(self):
         lion = Lion(States.subjects[0], States.states[0], States.states[1], States.actions[0])
         self.assertEqual(States.subjects[0], lion.Subject, 'Subject have wrong value')
