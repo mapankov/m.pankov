@@ -17,8 +17,3 @@ transitions.append(Lion(subjects[2], states[0], states[0], actions[1]))
 transitions.append(Lion(subjects[0], states[1], states[0], actions[1]))
 transitions.append(Lion(subjects[1], states[1], states[0], actions[2]))
 transitions.append(Lion(subjects[2], states[1], states[0], actions[3]))
-
-
-
-
-
