@@ -29,7 +29,12 @@ while True:
                 lock = False
         except ValueError:
             if subj == '*':
+                lock = False
                 quit()
+        finally:
+            if lock:
+                # если произошла ошибка
+                print('Выбран несуществующий входной символ!')
     print()
     # выводим предыдущее состояние льва
     print('Состояние льва: ', lion.CurrentState)
