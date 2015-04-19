@@ -24,28 +24,19 @@ class Tests(TestCase):
     def test_search_weather(self):
         self.page.open('http://www.yandex.ru')
         self.page.search_bar.search('gjujlf')
-        try:
-            WebDriverWait(self.driver, 10).until(lambda drv: self.page.title.lower().startswith('погода'))
-            self.assertIn('погода', self.page.title.lower(), 'Не удалось определить раскладку клавиатуры')
-        finally:
-            return
+        WebDriverWait(self.driver, 10).until(lambda drv: self.page.title.lower().startswith('погода'))
+        self.assertIn('погода', self.page.title.lower(), 'Не удалось определить раскладку клавиатуры')
 
     def test_open_virtual_keyboard(self):
         self.page.open('http://www.yandex.ru')
         self.page.search_bar.open_virtual_keyboard()
-        try:
-            self.assertTrue(self.page.search_bar.is_virtual_keyboard_displayed, 'Не отображается виртуальная клавиатура')
-        finally:
-            return
+        self.assertTrue(self.page.search_bar.is_virtual_keyboard_displayed, 'Не отображается виртуальная клавиатура')
 
     def test_open_link(self):
         self.page.open('http://www.yandex.ru')
         old_url = self.page.current_url
-        try:
-            self.page.try_visit_link('Погода')
-            self.assertNotEqual(old_url, self.page.current_url, 'Переход по ссылке не осуществлен')
-        finally:
-            return
+        self.page.try_visit_link('Погода')
+        self.assertNotEqual(old_url, self.page.current_url, 'Переход по ссылке не осуществлен')
 
 if __name__ == '__main__':
     unittest.main()
