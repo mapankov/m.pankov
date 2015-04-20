@@ -18,65 +18,65 @@ transitions = {states[0]: {subjects[0]: Transition(states[1], actions[0])},
 
 
 class LionTest(TestCase):
+    def setUp(self):
+        self.lion = Lion(states[0], transitions)
+
     # тест инициализации
     def test_init(self):
-        lion = Lion(states[0], transitions)
-        self.assertIn(lion.CurrentState,
-                      lion.Transitions.keys(),
+        self.assertIn(self.lion.CurrentState,
+                      self.lion.Transitions.keys(),
                       'Current state of lion is not contained in the table of transitions')
-        self.assertEqual(states[0], lion.CurrentState, 'CurrentState have wrong value')
-        self.assertEqual(None, lion.CurrentSubject, 'CurrentSubject have wrong value')
-        self.assertEqual(None, lion.CurrentAction, 'CurrentAction have wrong value')
+        self.assertEqual(states[0], self.lion.CurrentState, 'CurrentState have wrong value')
+        self.assertEqual(None, self.lion.CurrentSubject, 'CurrentSubject have wrong value')
+        self.assertEqual(None, self.lion.CurrentAction, 'CurrentAction have wrong value')
 
     # тест на переход льва в новое состояние
     def test_changestate(self):
-        lion = Lion(states[0], transitions)
-        self.assertIn(lion.CurrentState,
-                      lion.Transitions.keys(),
+        self.assertIn(self.lion.CurrentState,
+                      self.lion.Transitions.keys(),
                       'Current state of lion is not contained in the table of transitions')
         # запоминаем текущее состояние льва
-        lionCurrentState = lion.CurrentState
-        lionCurrentAction = lion.CurrentAction
-        lionCurrentSubject = lion.CurrentSubject
+        lionCurrentState = self.lion.CurrentState
+        lionCurrentAction = self.lion.CurrentAction
+        lionCurrentSubject = self.lion.CurrentSubject
         # лев должен перейти в другое состояние
-        lion.setstate(subjects[0])
-        self.assertIn(lion.CurrentSubject,
-                      lion.Transitions.get(lion.CurrentState).keys(),
+        self.lion.setstate(subjects[0])
+        self.assertIn(self.lion.CurrentSubject,
+                      self.lion.Transitions.get(self.lion.CurrentState).keys(),
                       'Current subject is not contained in the table of transitions')
 
-        temp = lion.Transitions.get(lionCurrentState).get(lion.CurrentSubject)
+        temp = self.lion.Transitions.get(lionCurrentState).get(self.lion.CurrentSubject)
 
-        self.assertEqual(temp.FollowingAction, lion.CurrentAction, 'CurrentAction changed incorrectly')
-        self.assertEqual(temp.FollowingState, lion.CurrentState, 'CurrentState changed incorrectly')
+        self.assertEqual(temp.FollowingAction, self.lion.CurrentAction, 'CurrentAction changed incorrectly')
+        self.assertEqual(temp.FollowingState, self.lion.CurrentState, 'CurrentState changed incorrectly')
 
-        self.assertNotEqual(lionCurrentState, lion.CurrentState, 'CurrentState not changed')
-        self.assertNotEqual(lionCurrentAction, lion.CurrentAction, 'CurrentAction not changed')
-        self.assertNotEqual(lionCurrentSubject, lion.CurrentSubject, 'CurrentSubject not changed')
+        self.assertNotEqual(lionCurrentState, self.lion.CurrentState, 'CurrentState not changed')
+        self.assertNotEqual(lionCurrentAction, self.lion.CurrentAction, 'CurrentAction not changed')
+        self.assertNotEqual(lionCurrentSubject, self.lion.CurrentSubject, 'CurrentSubject not changed')
 
     # тест на то, перешел ли лев в другое состояние
     def test_notchangestate(self):
-        lion = Lion(states[0], transitions)
-        self.assertIn(lion.CurrentState,
-                      lion.Transitions.keys(),
+        self.assertIn(self.lion.CurrentState,
+                      self.lion.Transitions.keys(),
                       'Current state of lion is not contained in the table of transitions')
-        lionCurrentState = lion.CurrentState
-        lionCurrentAction = lion.CurrentAction
-        lionCurrentSubject = lion.CurrentSubject
+        lionCurrentState = self.lion.CurrentState
+        lionCurrentAction = self.lion.CurrentAction
+        lionCurrentSubject = self.lion.CurrentSubject
         # лев не должен перейти в другое состояние, т.к. передан входной символ,
         # не содержащийся в таблице переходов
-        lion.setstate(subjects[1])
-        self.assertIn(lion.CurrentSubject,
-                      lion.Transitions.get(lion.CurrentState).keys(),
+        self.lion.setstate(subjects[1])
+        self.assertIn(self.lion.CurrentSubject,
+                      self.lion.Transitions.get(self.lion.CurrentState).keys(),
                       'Current subject is not contained in the table of transitions')
 
-        temp = lion.Transitions.get(lionCurrentState).get(lion.CurrentSubject)
+        temp = self.lion.Transitions.get(lionCurrentState).get(self.lion.CurrentSubject)
 
-        self.assertEqual(temp.FollowingAction, lion.CurrentAction, 'CurrentAction changed incorrectly')
-        self.assertEqual(temp.FollowingState, lion.CurrentState, 'CurrentState changed incorrectly')
+        self.assertEqual(temp.FollowingAction, self.lion.CurrentAction, 'CurrentAction changed incorrectly')
+        self.assertEqual(temp.FollowingState, self.lion.CurrentState, 'CurrentState changed incorrectly')
 
-        self.assertEqual(lionCurrentState, lion.CurrentState, 'CurrentState changed')
-        self.assertEqual(lionCurrentAction, lion.CurrentAction, 'CurrentAction changed')
-        self.assertEqual(lionCurrentSubject, lion.CurrentSubject, 'CurrentSubject changed')
+        self.assertEqual(lionCurrentState, self.lion.CurrentState, 'CurrentState changed')
+        self.assertEqual(lionCurrentAction, self.lion.CurrentAction, 'CurrentAction changed')
+        self.assertEqual(lionCurrentSubject, self.lion.CurrentSubject, 'CurrentSubject changed')
 
 if __name__ == '__main__':
     unittest.main()
