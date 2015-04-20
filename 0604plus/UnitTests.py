@@ -5,6 +5,7 @@ from Transition import Transition
 from Lion import Lion
 import unittest
 
+
 # входные символы
 subjects = ['антилопа', 'охотник']
 # состояния льва
