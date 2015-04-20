@@ -17,5 +17,3 @@ transitions = {states[0]: {subjects[0]: Transition(states[1], actions[0]),
                            subjects[1]: Transition(states[0], actions[2]),
                            subjects[2]: Transition(states[0], actions[3])}
                }
-
-# print(transitions.get(states[1]).get(subjects[0]).FollowingAction)
