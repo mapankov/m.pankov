@@ -71,8 +71,7 @@ class LionTest(TestCase):
 
         temp = self.lion.Transitions.get(lionCurrentState).get(self.lion.CurrentSubject)
 
-        self.assertNotEqual(temp.FollowingAction, self.lion.CurrentAction, 'CurrentAction changed incorrectly')
-        self.assertNotEqual(temp.FollowingState, self.lion.CurrentState, 'CurrentState changed incorrectly')
+        self.assertTrue(temp is None, 'CurrentAction changed incorrectly')
 
         self.assertEqual(lionCurrentState, self.lion.CurrentState, 'CurrentState changed')
         self.assertEqual(lionCurrentAction, self.lion.CurrentAction, 'CurrentAction changed')
